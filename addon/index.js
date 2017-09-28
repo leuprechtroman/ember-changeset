@@ -495,11 +495,11 @@ export function changeset(obj, validateFn = defaultValidatorFn, validationMap = 
 
         if (!isEqual(oldValue, value)) {
           set(changes, key, value);
+          this.notifyPropertyChange(CHANGES);
+          this.notifyPropertyChange(key);
         } else if (key in changes) {
           delete changes[key];
         }
-        this.notifyPropertyChange(CHANGES);
-        this.notifyPropertyChange(key);
 
         let errors = get(this, ERRORS);
         if (errors['__ember_meta__'] && errors['__ember_meta__']['values']) {
